@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+    background: #000;
+}
+
+.background{
+    background: url(../images/background.jpg) no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+}
+
+.text{
+    margin-top: 35vh;
+    flex: 1;
+}
+
+.box{
+    margin-top: 28vh;
+    flex: 1;
+}
+
+.text{
+    margin-left: 10%;
+    font-weight: 300px;
+}
+
+.box{
+    margin-right: 25%;
+}
+
+.text h1{
+    font-size: 70px;
+    color: rgb(1, 16, 19);
+    font-weight: 500;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.text p{
+    font-size: 20px;
+    color: rgb(73, 10, 221);
+    font-weight: 300;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.text p a{
+    color: rgb(253, 104, 17);
+    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.form{
+    background: transparent;
+    color: rgb(250, 18, 161);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+
+input{
+    margin: 20px 0;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color:black;
+    font-family: 'Raleway', sans-serif;
+}
+
+::placeholder{
+    color: black;
+    font-size: 14px;
+}
+
+.username, .password, .fullname, .email, .prn, .name{
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+.button{
+    background: transparent;
+    border: 1px solid rgb(32, 5, 5);
+    color: rgb(226, 36, 179);
+    font-size: 18px;
+}
+
+.button:hover{
+    background: rgb(16, 150, 240);
+    color: #000;
+}

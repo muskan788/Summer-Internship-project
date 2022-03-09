@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Mobile Specific Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Favicon-->
+  <link rel="shortcut icon" href="img/favicon.png">
+  <!-- Author Meta -->
+  <meta name="author" content="">
+  <!-- Meta Description -->
+  <meta name="description" content="">
+  <!-- Meta Keyword -->
+  <meta name="keywords" content="">
+  <!-- meta character set -->
+  <meta charset="UTF-8">
+  <!-- Site Title -->
+  <title>Faculty Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/facultyAddCourse.css">
+  <link rel="stylesheet" href="css/table-style.css">
+  <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap" rel="stylesheet">
+    
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    .tablecontainer {
+      margin-left: 50px;
+    }
+
+    .row {
+      height: 120px;
+      /*set height*/
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+
+    .col1 {
+      width: 100%;
+      height: 100%;
+    }
+
+    .col2 {
+      width: 49%;
+      margin: auto;
+      height: 100%;
+      margin-right: 2%;
+    }
+
+    .col2:last-child {
+      margin-right: 0;
+    }
+
+    .col3 {
+      border: 2px solid brown;
+      width: 32%;
+      float: left;
+      height: 100%;
+      margin-right: 2%;
+    }
+
+    .col3:last-child {
+      margin-right: 0;
+    }
+
+    .labs{
+      display: inline-block;
+      width: 120px;
+    }
+  </style>
+
+</head>
+
+<body>  
+  <div class="container">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <button type="button" class="btn btn-primary btn-arrow-left" onclick="window.location.href='facultyPage.html';">Back</button>
+    </nav>
+    <h2><b>Course Details</b></h2>
+    <div class="row" style="height: 50px;">
+      <div class="col2">
+        <select name="batchdisplay" id="batchdisplay" data-dropdown>
+          <option value="default" selected>&ndash;Select batch &ndash;</option>
+          <option value="2019">2015-2019</option>
+          <option value="2020">2016-2020</option>
+          <option value="2021">2017-2021</option>
+          <option value="2022">2018-2022</option>
+          <option value="2023">2019-2023</option>
+          <option value="2024">2020-2024</option>
+          <option value="2025">2021-2025</option>
+          <option value="2026">2022-2026</option>
+          <option value="2027">2023-2027</option>
+          <option value="2028">2024-2028</option>
+          <option value="2029">2025-2029</option>
+          <option value="2030">2026-2030</option>
+        </select>
+      </div>
+
+      <div class="col2">
+        <select name="yearsemdisplay" id="yearsemdisplay" data-dropdown>
+          <option value="default" selected>&ndash; Select Semester &ndash;</option>
+          <option value="sem1">1st Sem(FY 1st sem)</option>
+          <option value="sem2">2nd Sem(FY 2nd sem)</option>
+          <option value="sem3">3rd Sem(SY 1st sem)</option>
+          <option value="sem4">4th Sem(SY 2nd sem)</option>
+          <option value="sem5">5th Sem(TY 1st sem)</option>
+          <option value="sem6">6th Sem(TY 2nd sem)</option>
+          <option value="sem7">7th Sem(BY 1st sem)</option>
+          <option value="sem8">8th Sem(BY 2nd sem)</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col2">
+        <div id="wrapper">
+            <div class="btnrow">
+              <button type="button" class="btn2" id="addNewCourse" data-bs-toggle="modal" data-bs-target="#myModal" onclick="fillBoxes(null)">Add New Course</button>   
+            </div>
+        </div>
+      </div>
+      <div class="col2">
+        <div id="wrapper">
+            <div class="btnrow">
+                <button type="button" class="btn2" id="displayCourse" onClick="fetchAllCourses()">Display Courses</button>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <table class="table" id="coursetable">
+          <thead class="thead-dark">
+            <th>Sr. No</th>
+            <th>Course Name</th>
+            <th>Course Code</th>
+            <th>Credits</th>
+            <th>Update or Delete</th>
+            <th>Add CO-PO Matrix</th>
+          </thead>
+          <tbody id="coursetbody">
+
+          </tbody>
+      </table>
+    </div>
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <div class="modal-header">
+            <h4 class="modal-title">Control Panel</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+  
+          <div class="modal-body">
+              <label class="labs">Course Name:</label>
+                <input type="text" id="course" size=50><br><br>
+                <label class="labs">Course Code:</label>
+                <input type="text" id="code" size=20><br>
+                <label class="labs">Course Credits:</label>
+                <input type="text" id="credits" size=10><br>
+                <label class="labs">Passout Batch:</label>
+                <input type="text" id="addbatch" size=10 disabled><br>
+                <label class="labs">Sem:</label>
+                <input type="text" id="addsem" size=10 disabled><br>
+          </div>
+    
+          <div class="modal-footer">
+            <button type="button" id="addCourseBtn" class="btn btn-primary" onclick="addCourse()">Add New Course</button>
+            <button type="button" id="updateCourseBtn" class="btn btn-success" onclick="updateCourse()">Update Course</button>
+            <button type="button" id="deleteCourseBtn" class="btn btn-danger" onclick="deleteCourse()">Delete Course</button>
+          </div>
+    
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="myCopoModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">CO-PO Matrix</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="tablecontainer">
+              <section class="spreadsheet">
+                <table class="copotable">
+                  <thead>
+                  <tr>
+                    <th>CO-PO</th>
+                    <th>Final CO Attainment</th>
+                    <th>PO1</th>
+                    <th>PO2</th>
+                    <th>PO3</th>
+                    <th>PO4</th>
+                    <th>PO5</th>
+                    <th>PO6</th>
+                    <th>PO7</th>
+                    <th>PO8</th>
+                    <th>PO9</th>
+                    <th>PO10</th>
+                    <th>PO11</th>
+                    <th>PO12</th>
+                    <th>PSO1</th>
+                    <th>PSO2</th>
+                    <th>PSO3</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>CO1</td>
+                    <td id="CO1">0</td>
+                    <td id="CO1PO1">0</td>
+                    <td id="CO1PO2">0</td>
+                    <td id="CO1PO3">0</td>
+                    <td id="CO1PO4">0</td>
+                    <td id="CO1PO5">0</td>
+                    <td id="CO1PO6">0</td>
+                    <td id="CO1PO7">0</td>
+                    <td id="CO1PO8">0</td>
+                    <td id="CO1PO9">0</td>
+                    <td id="CO1PO10">0</td>
+                    <td id="CO1PO11">0</td>
+                    <td id="CO1PO12">0</td>
+                    <td id="CO1PSO1">0</td>
+                    <td id="CO1PSO2">0</td>
+                    <td id="CO1PSO3">0</td>
+                  </tr>
+                  <tr>
+                    <td>CO2</td>
+                    <td id="CO2">0</td>
+                    <td id="CO2PO1">0</td>
+                    <td id="CO2PO2">0</td>
+                    <td id="CO2PO3">0</td>
+                    <td id="CO2PO4">0</td>
+                    <td id="CO2PO5">0</td>
+                    <td id="CO2PO6">0</td>
+                    <td id="CO2PO7">0</td>
+                    <td id="CO2PO8">0</td>
+                    <td id="CO2PO9">0</td>
+                    <td id="CO2PO10">0</td>
+                    <td id="CO2PO11">0</td>
+                    <td id="CO2PO12">0</td>
+                    <td id="CO2PSO1">0</td>
+                    <td id="CO2PSO2">0</td>
+                    <td id="CO2PSO3">0</td>
+                  </tr>
+                  <tr>
+                    <td>CO3</td>
+                    <td id="CO3">0</td>
+                    <td id="CO3PO1">0</td>
+                    <td id="CO3PO2">0</td>
+                    <td id="CO3PO3">0</td>
+                    <td id="CO3PO4">0</td>
+                    <td id="CO3PO5">0</td>
+                    <td id="CO3PO6">0</td>
+                    <td id="CO3PO7">0</td>
+                    <td id="CO3PO8">0</td>
+                    <td id="CO3PO9">0</td>
+                    <td id="CO3PO10">0</td>
+                    <td id="CO3PO11">0</td>
+                    <td id="CO3PO12">0</td>
+                    <td id="CO3PSO1">0</td>
+                    <td id="CO3PSO2">0</td>
+                    <td id="CO3PSO3">0</td>
+                  </tr>
+                  <tr>
+                    <td>CO4</td>
+                    <td id="CO4">0</td>
+                    <td id="CO4PO1">0</td>
+                    <td id="CO4PO2">0</td>
+                    <td id="CO4PO3">0</td>
+                    <td id="CO4PO4">0</td>
+                    <td id="CO4PO5">0</td>
+                    <td id="CO4PO6">0</td>
+                    <td id="CO4PO7">0</td>
+                    <td id="CO4PO8">0</td>
+                    <td id="CO4PO9">0</td>
+                    <td id="CO4PO10">0</td>
+                    <td id="CO4PO11">0</td>
+                    <td id="CO4PO12">0</td>
+                    <td id="CO4PSO1">0</td>
+                    <td id="CO4PSO2">0</td>
+                    <td id="CO4PSO3">0</td>
+                  </tr>
+                  <tr>
+                    <td>CO5</td>
+                    <td id="CO5">0</td>
+                    <td id="CO5PO1">0</td>
+                    <td id="CO5PO2">0</td>
+                    <td id="CO5PO3">0</td>
+                    <td id="CO5PO4">0</td>
+                    <td id="CO5PO5">0</td>
+                    <td id="CO5PO6">0</td>
+                    <td id="CO5PO7">0</td>
+                    <td id="CO5PO8">0</td>
+                    <td id="CO5PO9">0</td>
+                    <td id="CO5PO10">0</td>
+                    <td id="CO5PO11">0</td>
+                    <td id="CO5PO12">0</td>
+                    <td id="CO5PSO1">0</td>
+                    <td id="CO5PSO2">0</td>
+                    <td id="CO5PSO3">0</td>
+                  </tr>
+                  <tbody>
+                </table>
+              </section>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="addCopoMatrix" class="btn btn-primary" onclick="addCopoMatrix()">Submit Data</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+            
+   <!--<div class="row">
+      <div class="col1">
+        <div id="wrapper">
+            <div class="btnrow">
+                <button class="btn2" id="displayCourse" onClick="window.location.href='facultyDisplayCourse.html';">Display Courses</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>-->
+    <br>
+    <br>
+  </div>
+  <script>
+    var table = document.getElementById('copotable');
+    var cells = document.getElementsByTagName('td') ;
+    for(var i = 0; i< cells.length; i++)
+    {
+      if(i==0 || i==17 || i==34 || i==51 || i==68)
+      {
+          cells[i].style.background = "whitesmoke";
+      } 
+      else
+      {
+      cells[i].onclick = function()
+      {
+        if(this.hasAttribute('data-clicked'))
+        {
+          return;
+        }
+        this.setAttribute('data-clicked', 'yes');
+        this.setAttribute('data-number', this.innerHTML);
+
+        var input = document.createElement('input');
+        input.setAttribute('type', 'number');
+        input.setAttribute('min', '0');
+        input.setAttribute('max', '3');
+        input.value = this.innerHTML;
+        input.style.width = this.offsetWidth - (this.clientLeft * 2) + "px";
+        input.style.height = this.offsetHeight - (this.clientTop * 2) + "px";
+        input.style.border = "0px";
+        input.style.fontFamily = "inherit";
+        input.style.fontSize = "inherit";
+        input.style.textAlign = "inherit";
+        input.style.backgroundColor = "LightGoldenRodYellow";
+
+        input.onblur = function()
+        {
+          var td = input.parentElement;
+          var org_text = input.parentElement.getAttribute('data-number');
+          var curr_text = this.value;
+          if(org_text != curr_text)
+          {
+            td.removeAttribute('data-clicked');
+            td.removeAttribute('data-number');
+            td.innerHTML = curr_text;
+            td.style.cssText = 'padding: 2px';
+            //console.log(org_text + " is changed to " + curr_text);
+          }
+          else
+          {
+            td.removeAttribute('data-clicked');
+            td.removeAttribute('data-number');
+            td.innerHTML = org_text;
+            td.style.cssText = 'padding: 2px';
+            //console.log(org_text + " is changed to " + org_text);
+          }
+        }
+        input.onkeypress = function()
+        {
+          if(event.keyCode == 13)
+          {
+            this.blur();
+          }
+        }
+        this.innerHTML = "";
+        this.style.cssText = 'padding: 0px 0px';
+        this.append(input);
+        this.firstElementChild.select();
+      }
+      }
+    }
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="js/dropdown.js"></script>
+  <script src="js/facultyAddCourse.js"></script>
+
+
+  
+</body>

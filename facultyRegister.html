@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Signup</title>
+    <link rel="stylesheet" href="css/login-style.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#"><img src="images/pologo.jpg" height="70rem" width="100rem"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="facultyLogin.html">Faculty Login</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="studentPage.html">Student Login</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="">About Us</a>
+          </li>
+        </ul>
+       
+      </div>
+    </nav>
+    <main>
+        <div class="background">
+            <div class="text">
+                <h1>Register</h1>
+                <p>Have Account? <a href="facultyLogin.html">Login</a></p>
+            </div>
+            <div class="box">
+                <form class="form" id="facultyRegisterForm">
+                    <input type="text" id="fullname" class="fullname" placeholder="Full Name" required><br>
+                    <input type="email" id="email" class="email" placeholder="abc@email.com" required><br>
+                    <input type="password" id="privatecode" class="username" placeholder="Private Code" required><br>
+                    <input type="password" id="password" class="password" placeholder="Password" required><br>
+                    <button type="submit" class="button" value="Signup" onclick="signUpWithEmailPassword()">Sign Up
+                      </button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="js/facultyRegister.js"></script>
+  </body>
+</html>
